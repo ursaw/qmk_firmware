@@ -46,8 +46,6 @@
 #define RGBLIGHT_SLEEP
 #endif
 #endif
-
+#define RGBLIGHT_LAYERS
 /* VIA related config */
 #define VIA_EEPROM_LAYOUT_OPTIONS_SIZE 2
-
-#define RGBLIGHT_LAYERS
