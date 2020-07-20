@@ -43,11 +43,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    /* Keymap: (Functional Layer)
    * ,-----------------------------------------------------------.
-   * |Esc~|F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12|INS| MO|
+   * |Esc~|F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12| ~ |INS|
    * |-----------------------------------------------------------|
    * | CAPS|   | UP|   |   |   |   |   |   |   |PLY|PRV|NXT| DEL |
    * |-----------------------------------------------------------|
-   * |   MO  | LE| DN| RE|   |   | LE| DN| UP| RE|   |   |Return |
+   * |   MO  | LE| DN| RE|   |   | LE| DN| UP| RE| _ML | ` |Rtrn |
    * |-----------------------------------------------------------|
    * |Shift   |   |   |MENU|  |   |   |MUT|MUP|MDN|  \|  PUP | MO|
    * |-----------------------------------------------------------|
@@ -56,12 +56,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 
 	[_FL] = LAYOUT(
-		KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, _______, KC_INS,
-		KC_CAPS, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, KC_DEL ,
-		            /* WASD for cursor */                        /*  VI for cursor  */
-        _______, KC_LEFT, KC_DOWN, KC_RIGHT,XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP  , KC_RIGHT, _______, _______, _______,
-		_______, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP , XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, KC_BSLS, KC_PGUP, _______,
-		_______, _______, _______, _______, _______, _______, _______, KC_HOME, _______,            KC_PGDOWN, KC_END
+        KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_TILDE, KC_INS,
+        KC_CAPS, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, KC_DEL ,
+                    /* WASD for cursor */                    /* - - - -  VI for cursor  - - - - */ /* _ML */
+        _______, KC_LEFT, KC_DOWN, KC_RIGHT,XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP  , KC_RIGHT, _______, KC_GRAVE, _______,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP , XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, KC_BSLS, KC_PGUP, _______,
+        _______, _______, _______, _______, _______, _______, _______, KC_HOME, _______,            KC_PGDOWN, KC_END
         ),
    /* Keymap: (Mouse Layer) incl Macros TODO
    * ,-----------------------------------------------------------.
@@ -79,6 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_ML] = LAYOUT(    // Mouse and macro
 		KC_TRNS, M(1), M(2), M(3), M(4), M(5), M(6), M(7), M(8), M(9), M(10), M(11), M(12), KC_TRNS, RESET,
 		XXXXXXX,            KC_MS_BTN1,  KC_MS_UP,     KC_MS_BTN2,   XXXXXXX, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, _______, RGB_VAD, RGB_MODE_PLAIN,
+                                                                                                                          /* _ML */
 		_______,            KC_MS_LEFT, KC_MS_DOWN,   KC_MS_RIGHT,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______,
 		XXXXXXX, XXXXXXX, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2,  XXXXXXX, BL_DEC,  BL_TOGG, BL_INC,  BL_STEP, XXXXXXX, XXXXXXX, _______, _______,
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
