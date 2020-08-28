@@ -85,6 +85,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 };
 
+
+
+// ====================================================================
+enum combos {
+  CBA_AUML,
+  CBA_OUML,
+  CBA_UUML,
+
+  AB_ESC
+  // CMB_CTRLDEL
+};
+
+const uint16_t PROGMEM uuml_combo[] = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM ouml_combo[] = {KC_O, KC_P, COMBO_END};
+const uint16_t PROGMEM auml_combo[] = {KC_A, KC_S, COMBO_END};
+
+// const uint16_t PROGMEM ctrldel_combo[] = {KC_BSPC, KC_DEL, COMBO_END};
+const uint16_t PROGMEM ab_combo[]   = {KC_A, KC_B, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [AB_ESC]     = COMBO(ab_combo,  KC_ESC),
+ // [CMB_CTRLDEL]  = COMBO_ACTION(ctrldel_combo),
+  [CBA_AUML] = COMBO_ACTION(auml_combo),
+  [CBA_OUML] = COMBO_ACTION(ouml_combo),
+  [CBA_UUML] = COMBO_ACTION(uuml_combo)
+};
+
+void process_combo_event(uint8_t combo_index, bool pressed) {
+  switch(combo_index) {
+  case CBA_AUML:  if (pressed) { tap_code16(KC_DOUBLE_QUOTE); tap_code16(KC_A); } break;
+  case CBA_OUML:  if (pressed) { tap_code16(KC_DOUBLE_QUOTE); tap_code16(KC_O); } break;
+  case CBA_UUML:  if (pressed) { tap_code16(KC_DOUBLE_QUOTE); tap_code16(KC_U); } break;
+
+ // case CMB_CTRLDEL:  if (pressed) { tap_code16(LCTL(KC_DEL)); } break;
+  }
+}
+// ====================================================================
+
+
 /*
  *   R G B   N U M B E R s
  *
