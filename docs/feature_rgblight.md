@@ -64,6 +64,9 @@ Changing the **Value** sets the overall brightness.<br>
 |`RGB_MODE_GRADIENT`|`RGB_M_G` |Static gradient animation mode                                      |
 |`RGB_MODE_RGBTEST` |`RGB_M_T` |Red, Green, Blue test animation mode                                |
 
+!> By default, if you have both the RGB Light and the [RGB Matrix](feature_rgb_matrix.md) feature enabled, these keycodes will work for both features, at the same time. You can disable the keycode functionality by defining the `*_DISABLE_KEYCODES` option for the specific feature.
+
+
 ## Configuration
 
 Your RGB lighting can be configured by placing these `#define`s in your `config.h`:
@@ -76,6 +79,7 @@ Your RGB lighting can be configured by placing these `#define`s in your `config.
 |`RGBLIGHT_LIMIT_VAL` |`255`        |The maximum brightness level                                                 |
 |`RGBLIGHT_SLEEP`     |*Not defined*|If defined, the RGB lighting will be switched off when the host goes to sleep|
 |`RGBLIGHT_SPLIT`     |*Not defined*|If defined, synchronization functionality for split keyboards is added|
+|`RGBLIGHT_DISABLE_KEYCODES`|*not defined*|If defined, disables the ability to control RGB Light from the keycodes. You must use code functions to control the feature| 
 
 ## Effects and Animations
 
@@ -372,6 +376,17 @@ rgblight_sethsv(HSV_GREEN, 2); // led 2
 |`rgblight_decrease_val_noeeprom()`          |Decrease the value for effect range LEDs. This wraps around at minimum value (not written to EEPROM) |
 |`rgblight_sethsv(h, s, v)`                  |Set effect range LEDs to the given HSV value where `h`/`s`/`v` are between 0 and 255 |
 |`rgblight_sethsv_noeeprom(h, s, v)`         |Set effect range LEDs to the given HSV value where `h`/`s`/`v` are between 0 and 255 (not written to EEPROM) |
+
+#### Speed functions
+|Function                                    |Description  |
+|--------------------------------------------|-------------|
+|`rgblight_increase_speed()`                 |Increases the animation speed |
+|`rgblight_increase_speed_noeeprom()`        |Increases the animation speed (not written to EEPROM) |
+|`rgblight_decrease_speed()`                 |Decreases the animation speed |
+|`rgblight_decrease_speed_noeeprom()`        |Decreases the animation speed (not written to EEPROM) |
+|`rgblight_set_speed()`                      |Sets the speed. Value is between 0 and 255 |
+|`rgblight_set_speed_noeeprom()`             |Sets the speed. Value is between 0 and 255 (not written to EEPROM) |
+
 
 #### layer functions
 |Function                                    |Description  |
