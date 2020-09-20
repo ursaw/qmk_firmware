@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_GESC, KC_1,   KC_2 , KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSLS ,KC_DEL ,
 		KC_TAB,     KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,        KC_BSPC ,
 		MO(_FL), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, LT(_ML,KC_SCLN), KC_QUOT, KC_ENT,
-		KC_LSFT, KC_NO, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, RSFT_T(KC_UP), MO(_FL),
+		KC_LSFT, KC_NO, LCTL_T(KC_Z), LGUI_T(KC_X), KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, RCTL_T(KC_SLSH), RSFT_T(KC_UP), MO(_FL),
 		KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, KC_SPC, KC_SPC, KC_RALT, /*RGUI_T(*/KC_LEFT, KC_NO, KC_DOWN , RCTL_T(KC_RIGHT)
         ),
 
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, KC_DEL ,
                     /* WASD for cursor */                    /* - - - -  VI for cursor  - - - - */ /* _ML */
         _______, KC_LEFT, KC_DOWN, KC_RIGHT,XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP  , KC_RIGHT, _______, KC_GRAVE, _______,
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_APP , XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, KC_BSLS, KC_PGUP, _______,
+        _______, XXXXXXX, XXXXXXX, KC_LGUI , KC_APP , XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, KC_BSLS, KC_PGUP, _______,
         _______, _______, _______, _______, _______, _______, _______, KC_HOME, _______,            KC_PGDOWN, KC_END
         ),
    /* Keymap: (Mouse Layer) incl Macros TODO
@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 // ====================================================================
-enum combos {
+/*enum combos {
   CBA_AUML,
   CBA_OUML,
   CBA_UUML,
@@ -97,9 +97,9 @@ enum combos {
   // CMB_CTRLDEL
 };
 
-const uint16_t PROGMEM uuml_combo[] = {KC_U, KC_I, COMBO_END};
-const uint16_t PROGMEM ouml_combo[] = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM auml_combo[] = {KC_A, KC_S, COMBO_END};
+const uint16_t PROGMEM uuml_combo[] = {KC_U, KC_H, COMBO_END};
+const uint16_t PROGMEM ouml_combo[] = {KC_O, KC_K, COMBO_END};
+const uint16_t PROGMEM auml_combo[] = {KC_A, KC_Z, COMBO_END};
 
 // const uint16_t PROGMEM ctrldel_combo[] = {KC_BSPC, KC_DEL, COMBO_END};
 const uint16_t PROGMEM ab_combo[]   = {KC_A, KC_B, COMBO_END};
@@ -121,6 +121,7 @@ void process_combo_event(uint8_t combo_index, bool pressed) {
  // case CMB_CTRLDEL:  if (pressed) { tap_code16(LCTL(KC_DEL)); } break;
   }
 }
+*/
 // ====================================================================
 
 

@@ -49,5 +49,6 @@
 #define RGBLIGHT_LAYERS
 /* VIA related config */
 #define VIA_EEPROM_LAYOUT_OPTIONS_SIZE 2
-#define COMBO_TERM 200
-#define COMBO_COUNT 4
+
+// #define COMBO_TERM 200
+// #define COMBO_COUNT 4
