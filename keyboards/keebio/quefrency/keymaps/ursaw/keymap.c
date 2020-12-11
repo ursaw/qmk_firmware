@@ -4,6 +4,11 @@
 //  qmk compile -kb  keebio/quefrency/rev2 -km ursaw
 //  config in $HOME/.config/qmk/qnk.ini
 
+// qmk config user.keyboard=keebio/quefrency/rev2
+// qmk config user.keymap=ursaw
+
+
+
 
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
@@ -46,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------.
    * |Esc~|F1| F2| F3| F4| F5| F6| F7| F8| F9|F10|F11|F12| ~ |INS|
    * |-----------------------------------------------------------|
-   * | CAPS|   | UP|   |   |   |   |   |   |   |PLY|PRV|NXT| DEL |
+   * | CAPS|   | UP|   |   |   |PUP|HME| UP|END|PLY|PRV|NXT| DEL |
    * |-----------------------------------------------------------|
-   * |   MO  | LE| DN| RE|   |   | LE| DN| UP| RE| _ML | ` |Rtrn |
+   * |   MO  | LE| DN| RE|   |   |PDN| LE| UP| RE| _ML | ` |Rtrn |
    * |-----------------------------------------------------------|
    * |Shift   |   |WIN|MENU|  |   |   |MUT|MUP|MDN|  \|  PUP | MO|
    * |-----------------------------------------------------------|
@@ -57,9 +62,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_FL] = LAYOUT(
     KC_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_TILDE,  KC_INS, \
-    _______, _______, KC_UP, _______,   _______, _______, _______, _______, _______, _______, KC_MPLY, KC_MPRV, KC_MNXT, KC_DEL, \
-                        /* WASD for cursor */                    /* - - - -  VI for cursor  - - - - */ /* _ML */
-    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP  , KC_RIGHT , KC_GRAVE ,_______,\
+    _______, _______, KC_UP, _______,   _______, _______, KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_MPLY, KC_MPRV, KC_MNXT, KC_DEL, \
+                        /* WASD for cursor */                    /* - - - -  NAVI IJKL  - - - - */ /* _ML */
+    _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, KC_PGDOWN, KC_LEFT, KC_DOWN, KC_RIGHT , _______, KC_GRAVE ,_______,\
     _______, _______, KC_LGUI, KC_APP , _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_BSLS  , KC_PGUP, _______, \
     _______, _______, _______, _______, _______,          _______, _______, _______, KC_HOME,  KC_NO   , KC_PGDOWN, KC_END
   ),
