@@ -128,9 +128,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT( \
    _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                           KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
-  _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                       KC_PGUP, KC_HOME,  KC_UP, KC_END   ,XXXXXXX, KC_F12, \
-  _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, KC_CAPS,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_MINUS, KC_EQUAL, \
-  _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC,   KC_BSLASH, _______, \
+  _______,  XXXXXXX,  KC_LGUI,   KC_APP,  XXXXXXX, XXXXXXX,                       KC_PGUP, KC_HOME,  KC_UP, KC_END   ,XXXXXXX, KC_F12, \
+  _______, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, KC_CAPS,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_MINUS, KC_EQUAL, \
+  _______,_______, XXXXXXX, KC_APP , XXXXXXX, XXXXXXX,  _______,          _______,  XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC,   KC_BSLASH, _______, \
                          _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______ \
 ),
 /* ADJUST
