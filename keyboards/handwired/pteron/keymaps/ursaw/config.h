@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config_common.h"
-
+#define COMBO_VARIABLE_LEN
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x6060
@@ -24,3 +24,6 @@
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5  // 5 is default
+#define TAPPING_TERM 200
+
+

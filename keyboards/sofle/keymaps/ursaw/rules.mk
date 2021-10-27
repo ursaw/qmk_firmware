@@ -4,3 +4,6 @@ ENCODER_ENABLE = yes
 CONSOLE_ENABLE = yes
 EXTRAKEY_ENABLE = yes
 MOUSEKEY_ENABLE = yes
+
+VPATH += keyboards/gboards
+COMBO_ENABLE=yes

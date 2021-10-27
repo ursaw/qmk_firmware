@@ -1,0 +1,3 @@
+// SUBS(helloword, "helloz Urs", KC_H, KC_J )
+COMB(winkey, KC_LGUI, KC_Z, KC_B)
+//COMB(mouselazer, MO(_ADJUST), KC_A, KC_G)
