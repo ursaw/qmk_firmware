@@ -19,6 +19,9 @@
 
 #include QMK_KEYBOARD_H
 
+/* https://getreuer.info/posts/keyboards/caps-word/index.html */
+#include "features/caps_word.h"
+
 #define CM_SPAL  LGUI_T(KC_SPC)
 #define CM_SPAR  RGUI_T(KC_SPC)
 
@@ -52,11 +55,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
    * | Shft |   Z  |   X  |   C  |   V  |   B  |                                  |   N  |   M  |   ,  |   .  |   /  | Shft |
    * '-----------------------------------------/                                  \-----------------------------------------'
-   *                                  / RAISE /---------------.    .---------------\ LOWER \
-   *                                 /       /  Cmd  / Shift /      \ Shift \  Cmd  \       \
-   *                                '-------/ Space / Enter /        \ Enter \ Space \-------'
+   *                                  / RAISE /---------------.    .---------------\ RAISE \
+   *                                 /       /        / Shift /     \ Shift \       \       \
+   *                                '-------/ Enter / Enter /        \ Enter \ Space \-------'
    *                                       /---------------/          \---------------\
-   *                                      /  Alt  / Ctrl  /            \  Ctrl \  Alt  \
+   *                                      /  Alt  / LGUI  /            \ LOWER \  Alt  \
    *                                     /       /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
@@ -78,11 +81,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
    * | Shft |   Z  |   X  |   C  |   D  |   V  |                                  |   K  |   H  |   ,  |   .  |   /  | Shft |
    * '-----------------------------------------/                                  \-----------------------------------------'
-   *                                  / RAISE /---------------.    .---------------\ LOWER \
-   *                                 /       /  Cmd  / Shift /      \ Shift \  Cmd  \       \
-   *                                '-------/ Space / Enter /        \ Enter \ Space \-------'
+   *                                  / RAISE /---------------.    .---------------\ RAISE \
+   *                                 /       /        / Shift /     \ Shift \       \       \
+   *                                '-------/ Enter / Enter /        \ Enter \ Space \-------'
    *                                       /---------------/          \---------------\
-   *                                      /  Alt  / Ctrl  /            \  Ctrl \  Alt  \
+   *                                      /  Alt  / LGUI  /            \ LOWER \  Alt  \
    *                                     /       /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
@@ -97,14 +100,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    [_RAISE] = LAYOUT_split_4x6_5(
   /* RAISE
+   *
    * .-----------------------------------------.                                  .-----------------------------------------.
    * |      |  F1  |  F2  |  F3  |  F4  |  F5  |                                  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |      |      |      |   [  |   ]  |      |                                  |   $  |   /  |  *   |  #   |   ~  |  F12 |
+   * |      |  GUI |  {   |   }  |   +  |  `   |                                  |  PGUP| HOME |   UP |  END |      |  F12 |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |  Ins |  !   |  @   |   (  |   )  |      |                                  |   %  |   -  |  +   |  =   |  ?   |      |
+   * |      |   |  |  [   |   ]  |   -  |  =   |                                  |  PGDN|  LFT |  DWN |  RGT |  -   |  =   |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |      |      |      |   {  |   }  |      |                                  |   ^  |   &  |  |   |      |      |      |
+   * |      |  UNDO|  GUI |  APP |  SPC |  _   |                                  |  DEL | BSPC |   [  |  ]   |   \  |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
    *                                  /       /---------------.    .---------------\       \
    *                                 /       /       /       /      \       \       \       \
@@ -114,23 +118,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                                     /       /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
-   _______, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                                     KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-   _______, KC_LGUI,  KC_LCBR,   KC_RCBR,  KC_PLUS, KC_GRV,                                   KC_PGUP, KC_HOME,  KC_UP, KC_END   ,XXXXXXX, KC_F12,
-   _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                 KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_MINUS, KC_EQUAL,
-   _______, KC_UNDO, KC_LGUI, KC_APP, KC_SPC, KC_UNDS,                                     KC_DEL, KC_BSPC, KC_LBRC, KC_RBRC,   KC_BSLASH, _______,
+   _______, KC_F1  , KC_F2  , KC_F3  , KC_F4   , KC_F5   ,                                 KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10  , KC_F11  ,
+   _______, KC_LGUI, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                 KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_INS  , KC_F12  ,
+   _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                 KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_MINUS, KC_EQUAL,
+   _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                                 KC_DEL , KC_BSPC, KC_LBRC, KC_RBRC, KC_BSLASH, _______,
                                                 _______, _______, _______, _______, _______, _______,
                                                          _______, _______, _______, _______
    ),
   [_LOWER] = LAYOUT_split_4x6_5(
   /* LOWER
    * .-----------------------------------------.                                  .-----------------------------------------.
-   * |      |  F1  |  F2  |  F3  |  F4  |  F5  |                                  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |
+   * |      |      |   7  |   8  |   9  |   -  |                                  |      |      |      |      |      |      |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |      |      |      |   [  |   ]  |  +   |                                  |      |      |  up  |      |      |  F12 |
+   * |  TAB |      |   4  |   5  |   6  |   +  |                                  |      |      |      |      |      |      |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |  Ins |  !   |  @   |   (  |   )  |  -   |                                  |      | left | down | rght |  ?   |      |
+   * | CAPS |      |   1  |   2  |   3  |  ENT |                                  |      | STOP | PREV | NEXT |      |      |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |      |      |      |   {  |   }  |  =   |                                  |      |      |      |      |      |      |
+   * |      |      |   0  |   0  |   .  |  ENT |                                  |      | Mute |  V+  | V-   |      |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
    *                                  /       /---------------.    .---------------\       \
    *                                 /       /       /       /      \       \       \       \
@@ -140,10 +144,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                                     /       /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
-   XXXXXXX, KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,                                     KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-   XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_PPLS,                                     XXXXXXX, XXXXXXX, KC_UP  , XXXXXXX, XXXXXXX, KC_F12 ,
-   KC_INS , KC_EXLM, KC_AT  , KC_LPRN, KC_RPRN, KC_MINS,                                     XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, KC_QUES, XXXXXXX,
-   XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, KC_PEQL,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+   XXXXXXX, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_MINUS,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+   _______, XXXXXXX, KC_4  , KC_5  , KC_6  , KC_PLUS,                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+   KC_CAPS ,XXXXXXX, KC_1  , KC_2  , KC_3  , KC_ENT,                                 XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, XXXXXXX,
+   XXXXXXX, XXXXXXX, KC_0  , KC_0  ,KC_DOT , KC_ENT,                                 XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
                                                 _______, _______, _______, _______, _______, _______,
                                                          _______, _______, _______, _______
    ),
@@ -187,6 +191,16 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+
+
+  if (!process_caps_word(keycode, record)) { return false; }
+  // Your macros ...
+
+  return true;
+}
+
 
 // Flexible macOS-friendly Grave Escape
 // https://docs.qmk.fm/#/feature_key_overrides?id=flexible-macos-friendly-grave-escape
