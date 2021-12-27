@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "g/keymap_combo.h"
 
+
 /*   based on default,  since I have used elite c
  *
  *   qmk config user.keyboard=sofle/rev1
@@ -156,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 
 static void render_logo(void) {
     static const char PROGMEM qmk_logo[] = {
