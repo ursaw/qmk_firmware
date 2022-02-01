@@ -14,13 +14,19 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-//  qmk flash -bl dfu
-
+/*  qmk flash -bl dfu
+ *
+ *
+ * TODO  https://github.com/filterpaper/qmk_userspace
+ */
 
 #include QMK_KEYBOARD_H
 
 /* https://getreuer.info/posts/keyboards/caps-word/index.html */
-#include "features/caps_word.h"
+#include "caps_word.h"
+/* https://getreuer.info/posts/keyboards/select-word/index.html */
+#include "select_word.h"
+
 
 #define CM_SPAL  LGUI_T(KC_SPC)
 #define CM_SPAR  RGUI_T(KC_SPC)
@@ -44,6 +50,9 @@ enum layer_names {
   _ADJUST
 };
 
+enum custom_keycodes {
+    SELWORD  = SAFE_RANGE
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_4x6_5(
@@ -121,10 +130,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                                    '---------------'                '---------------'
    */
    _______, KC_F1  , KC_F2  , KC_F3  , KC_F4   , KC_F5   ,                                 KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10  , KC_F11  ,
-   _______, KC_LGUI, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                 KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_INS  , KC_F12  ,
+   _______, SELWORD, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                 KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_INS  , KC_F12  ,
    _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                 KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_MINUS, KC_EQUAL,
    _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                                 KC_DEL , KC_BSPC, KC_LBRC, KC_RBRC, KC_BSLASH, _______,
-                                                _______, _______, _______, _______, _______, _______,
+                                                _______, _______, KC_SPC,  KC_ENT , _______, _______,
                                                          _______, _______, _______, _______
    ),
   [_LOWER] = LAYOUT_split_4x6_5(
@@ -197,7 +206,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 
-  if (!process_caps_word(keycode, record)) { return false; }
+    /* for select word */
+    if (!process_select_word(keycode, record, SELWORD)) { return false; }
+    /* for caps word */
+    if (!process_caps_word(keycode, record)) { return false; }
+
   // Your macros ...
 
   return true;

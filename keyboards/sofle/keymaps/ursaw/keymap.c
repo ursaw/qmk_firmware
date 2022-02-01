@@ -1,6 +1,9 @@
 #include QMK_KEYBOARD_H
 #include "g/keymap_combo.h"
 
+/* https://getreuer.info/posts/keyboards/select-word/index.html */
+#include "select_word.h"
+#include "caps_word.h"
 
 /*   based on default,  since I have used elite c
  *
@@ -13,7 +16,7 @@
  *
  *
  *
- *
+ *  https://github.com/filterpaper/qmk_userspace
  *
  *   KC_X
  *
@@ -40,7 +43,8 @@ enum custom_keycodes {
     KC_NXTWD,
     KC_LSTRT,
     KC_LEND,
-    KC_DLINE
+    KC_DLINE,
+    SELWORD
 };
 
 
@@ -66,7 +70,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,         KC_Q     ,  KC_W, KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC, \
   KC_LSFT,        KC_A     ,  KC_S, KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT, \
   KC_LCTRL,       KC_Z     ,  KC_X, KC_C,    KC_V,    KC_B, KC_MUTE,     XXXXXXX,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT, \
-                 KC_LGUI,KC_LCTRL,KC_LALT, KC_RAISE, KC_ENT,      /*LT(_RAISE,*/KC_SPC,  KC_RAISE, KC_RALT, KC_LOWER, KC_RCTRL \
+                 KC_LGUI,LT(_RAISE,KC_LEAD),
+                                   KC_LALT, KC_RAISE, KC_ENT,      /*LT(_RAISE,*/KC_SPC,  KC_RAISE, KC_RALT, KC_LOWER, KC_RCTRL \
 ),
 /*
  * COLEMAKKC_LOWER
@@ -106,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_LOWER] = LAYOUT( \
-  _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
+  _______,  DM_PLY1,  DM_PLY2, DM_REC1, DM_REC1, DM_RSTP,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
   KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12, \
   _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                       KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, KC_PLUS, \
   _______,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, _______,       _______, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_PIPE, _______, \
@@ -129,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT( \
   _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                           KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
-  _______, KC_LGUI,  KC_LCBR,   KC_RCBR,  KC_PLUS, KC_GRV,                       KC_PGUP, KC_HOME,  KC_UP, KC_END   ,XXXXXXX, KC_F12, \
+  _______, SELWORD,  KC_LCBR,   KC_RCBR,  KC_PLUS, KC_GRV,                       KC_PGUP, KC_HOME,  KC_UP, KC_END   ,XXXXXXX, KC_F12, \
   _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_MINUS, KC_EQUAL, \
   _______, KC_UNDO, KC_LGUI, KC_APP, KC_SPC, KC_UNDS,  _______,         _______, KC_DEL, KC_BSPC, KC_LBRC, KC_RBRC,   KC_BSLASH, _______, \
                          _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______ \
@@ -222,17 +227,67 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
         print_status_narrow();
     } else {
         render_logo();
     }
+
+return true;
 }
 
 #endif
 
+#ifdef  LEADER_ENABLE
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_ONE_KEY(KC_F) {
+      // Anything you can do in a macro.
+      SEND_STRING("QMK is awesome.");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_D) {
+      SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
+    }
+    SEQ_THREE_KEYS(KC_D, KC_D, KC_S) {
+      SEND_STRING("https://start.duckduckgo.com\n");
+    }
+    SEQ_TWO_KEYS(KC_A, KC_S) {
+      register_code(KC_LGUI);
+      register_code(KC_S);
+      unregister_code(KC_S);
+      unregister_code(KC_LGUI);
+    }
+    // Windows keys with cursor as leader key  KC_UP KC_LEFT, KC_DOWN, KC_RGHT,
+    SEQ_TWO_KEYS(KC_W, KC_LEFT) {
+      register_code(KC_LGUI);   register_code(KC_LEFT);   unregister_code(KC_LEFT);   unregister_code(KC_LGUI);
+    }
+    SEQ_TWO_KEYS(KC_W, KC_RGHT) {
+      register_code(KC_LGUI);   register_code(KC_RGHT);   unregister_code(KC_RGHT);   unregister_code(KC_LGUI);
+    }
+    SEQ_TWO_KEYS(KC_W, KC_UP) {
+      register_code(KC_LGUI);   register_code(KC_UP);     unregister_code(KC_UP);     unregister_code(KC_LGUI);
+    }
+    SEQ_TWO_KEYS(KC_W, KC_DOWN) {
+      register_code(KC_LGUI);   register_code(KC_DOWN);   unregister_code(KC_DOWN);   unregister_code(KC_LGUI);
+    }
+  }
+}
+#endif
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+    /* for select word */
+    if (!process_select_word(keycode, record, SELWORD)) { return false; }
+    /* for caps word */
+    if (!process_caps_word(keycode, record)) { return false; }
+
     switch (keycode) {
         case KC_QWERTY:
             if (record->event.pressed) {

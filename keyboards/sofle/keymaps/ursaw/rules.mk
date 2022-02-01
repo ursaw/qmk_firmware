@@ -7,6 +7,9 @@ EXTRAKEY_ENABLE = yes
 MOUSEKEY_ENABLE = no
 WPM_ENABLE = no
 
+LEADER_ENABLE = no
+DYNAMIC_MACRO_ENABLE = yes
+
 
 VPATH += keyboards/gboards
 COMBO_ENABLE=yes
