@@ -139,11 +139,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LOWER] = LAYOUT_split_4x6_5(
   /* LOWER
    * .-----------------------------------------.                                  .-----------------------------------------.
-   * |      |      |   7  |   8  |   9  |   -  |                                  |      |      |      |      |      |      |
+   * |      |      |   7  |   8  |   9  |  BS  |                                  |  Mr1 |  Mr2 | Mstp |      |      |      |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |  TAB |      |   4  |   5  |   6  |   +  |                                  |      |      |      |      |      |      |
+   * |  TAB |   *  |   4  |   5  |   6  |   +  |                                  |  M1  |  M2  |      |      |      |      |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * | CAPS |      |   1  |   2  |   3  |  ENT |                                  |      | STOP | PREV | NEXT |      |      |
+   * |      |   /  |   1  |   2  |   3  |  -   |                                  |      | STOP | PREV | NEXT |      | CAPS |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
    * |      |      |   0  |   0  |   .  |  ENT |                                  |      | Mute |  V+  | V-   |      |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
@@ -155,9 +155,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                                     /       /       /              \       \       \
    *                                    '---------------'                '---------------'
    */
-   XXXXXXX, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_MINUS,                               DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, XXXXXXX, XXXXXXX,
-   _______, XXXXXXX, KC_4  , KC_5  , KC_6  , KC_PLUS,                                DM_PLY1, DM_PLY2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-   KC_CAPS ,XXXXXXX, KC_1  , KC_2  , KC_3  , KC_ENT,                                 XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, XXXXXXX,
+   XXXXXXX, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_BSPC,                                DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, XXXXXXX, XXXXXXX,
+   _______, KC_PAST, KC_4  , KC_5  , KC_6  , KC_PLUS,                                DM_PLY1, DM_PLY2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+   XXXXXXX ,KC_PSLS, KC_1  , KC_2  , KC_3  , KC_MINUS,                               XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_CAPS,
    XXXXXXX, XXXXXXX, KC_0  , KC_0  ,KC_DOT , KC_ENT,                                 XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
                                                 _______, _______, _______, _______, _______, _______,
                                                          _______, _______, _______, _______
