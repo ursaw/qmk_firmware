@@ -1,0 +1,7 @@
+MCU = atmega32u4
+BOOTLOADER = caterina
+RGBLIGHT_ENABLE = no
+SPLIT_KEYBOARD = no
+ENCODER_ENABLE = yes
+
+DEFAULT_FOLDER = chocofly/v1
