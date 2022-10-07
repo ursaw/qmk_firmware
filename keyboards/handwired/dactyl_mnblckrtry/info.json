@@ -1,0 +1,8 @@
+{
+    "keyboard_name": "Dactyl mnblck rtry",
+    "maintainer": "ursaw",
+    "switchMount": "cherry",
+    "manufacturer": "handwired",
+    "bootloader": "atmel-dfu"
+
+}
