@@ -16,7 +16,7 @@
  */
 #include QMK_KEYBOARD_H
 
-/*      qmk compile -kb bastardkb/charybdis/4x6/v2/ursaw -km ursaw
+/*      qmk compile -kb bastardkb/charybdis/4x6/v2/elitec -km ursaw
  *
  */
 
@@ -121,13 +121,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 };
+
+
 // clang-format on
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     // Your macros ...
 
-    /* for select word */
+    // for select word
     if (!process_select_word(keycode, record, SELWORD)) { return false; }
 
     return true;
 }
-
