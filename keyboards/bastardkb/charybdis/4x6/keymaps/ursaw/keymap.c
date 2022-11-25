@@ -20,6 +20,10 @@
  *
  */
 
+// TODO safe ring in latex greek
+// #include "latex_greek.h"
+
+
 /* https://getreuer.info/posts/keyboards/select-word/index.html */
 #include "select_word.h"
 
@@ -29,16 +33,29 @@ enum charybdis_keymap_layers {
     _QWERTY = 0,
     _LOWER,
     _RAISE,
+    _LATEX
 };
 
-enum custom_keycodes {
-    SELWORD  = SAFE_RANGE
+enum userspace_keycodes {
+#ifndef NO_CHARYBDIS_KEYCODES
+  SELWORD = CHARYBDIS_SAFE_RANGE,
+#else
+  SELWORD = SAFE_RANGE,
+#endif // !NO_CHARYBDIS_KEYCODES
+ TEX_A,  TEX_B,  TEX_C,  TEX_D,  TEX_E,  TEX_F,  TEX_G,  TEX_I,  TEX_K,
+ TEX_L,  TEX_M,  TEX_N,  TEX_O,  TEX_P,  TEX_S,  TEX_T,  TEX_V,  TEX_X,  TEX_Z
 };
+
+
+//enum custom_keycodes {
+
 
 
 #define LOWER   MO(_LOWER)
 #define RAISE   MO(_RAISE)
 #define SPC_RSE LT(_RAISE, KC_SPC)
+#define SPC_LWR LT(_LOWER, KC_SPC)
+#define ENT_TEX LT(_LATEX, KC_ENT)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -48,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    KC_TAB  , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,                                     KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
    KC_LSFT , KC_A   , KC_S   , KC_D   , KC_F   , KC_G   ,                                     KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
    KC_LCTRL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,                                     KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT,
-                                                RAISE  , KC_ENT, LOWER ,     RAISE , SPC_RSE,
+                                                RAISE  , KC_ENT, ENT_TEX ,     SPC_LWR , SPC_RSE,
                                                          KC_LALT, KC_LGUI,   KC_RALT
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
   //                                 KC_LGUI, KC_SPC,   LOWER,      RAISE,  KC_ENT,
@@ -69,10 +86,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |      |      |   0  |   0  |   .  |  ENT |                                  |      | Mute |  V+  | V-   |      |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
    */
-   XXXXXXX, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_BSPC,                                DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, XXXXXXX, XXXXXXX,
+   XXXXXXX, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_BSPC,                               DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, XXXXXXX, XXXXXXX,
    _______, KC_PAST, KC_4  , KC_5  , KC_6  , KC_PLUS,                                DM_PLY1, DM_PLY2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-   XXXXXXX ,KC_PSLS, KC_1  , KC_2  , KC_3  , KC_MINUS,                               XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_CAPS,
-   XXXXXXX, XXXXXXX, KC_0  , KC_0  ,KC_DOT , KC_ENT,                                 XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
+   XXXXXXX ,KC_PSLS, KC_1  , KC_2  , KC_3  , KC_MINUS,               POINTER_DEFAULT_DPI_FORWARD , KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_CAPS,
+   XXXXXXX, XXXXXXX, KC_0  , KC_0  ,KC_DOT , KC_ENT,                 POINTER_DEFAULT_DPI_REVERSE , KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
                                                 _______, _______, _______,      _______, _______,
                                                          _______, _______,      _______
 
@@ -116,10 +133,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    _______, SELWORD, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                 KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_INS  , KC_F12  ,
    _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                 KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_MINUS, KC_EQUAL,
    _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                                 KC_DEL , KC_BSPC, KC_LBRC, KC_RBRC, KC_BSLASH, _______,
-                                  _______, _______, KC_SPC,    KC_MS_BTN1, KC_MS_BTN1,
-                                           _______, _______,    _______
+                                  _______, _______, KC_SPC,    KC_MS_BTN3, KC_MS_BTN1,
+                                           _______, _______,   KC_MS_BTN2
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
+    [_LATEX] = LAYOUT_charybdis_4x6(
+  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+   _______ , _______   , _______   , _______   , _______   , _______   ,                                     _______   , _______   , _______   , _______   , _______ , _______,
+   _______ , _______   , _______   , _______   , _______   , _______   ,                                     _______   , _______   , TEX_I     , TEX_O     , TEX_P   , _______,
+   _______ , TEX_A     , TEX_S     , TEX_D     , TEX_F     , TEX_G     ,                                     _______   , _______   , TEX_K     , TEX_L     , _______ , _______,
+   _______ , TEX_Z     , TEX_X     , TEX_C     , TEX_V     , TEX_B     ,                                     TEX_N     , TEX_M     , _______   , _______   , _______ , _______,
+                                                _______  , _______, _______ ,     _______ , _______,
+                                                         _______, _______,   _______
+  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+  //                                 KC_LGUI, KC_SPC,   LOWER,      RAISE,  KC_ENT,
+  //                                         KC_LALT, KC_BSPC,     KC_DEL
+  //                            ╰───────────────────────────╯ ╰──────────────────╯
+  ),
+
 };
 
 
@@ -130,5 +161,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     // for select word
     if (!process_select_word(keycode, record, SELWORD)) { return false; }
 
+    // latex buttons
+    // if (process_latex_greek(keycode, record, SELWORD)) { return true; }
+
     return true;
 }
+
+
+
+
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+
+    if (get_mods() & MOD_BIT(KC_LCTRL)) {
+        charybdis_set_pointer_dragscroll_enabled(1);
+    }else{
+        charybdis_set_pointer_dragscroll_enabled(0);
+    }
+    return mouse_report;
+}
+

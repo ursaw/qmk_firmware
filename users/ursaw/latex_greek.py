@@ -29,15 +29,16 @@ class TeXmacro:
             if (record->event.pressed) {{
         '''
         larr = self.long.split(',')
-        if len(larr)>1:
-            str += f'''        SEND_STRING("\\\\{larr[0]} ");
-                SEND_STRING("\\\\{larr[1]} ");
+        # TODO upper case with shift return |Xi instead of \Xi
+        if len(larr)>10:
+            str += f'''        if( get_mods() & MOD_BIT(MOD_MASK_SHIFT) ) {{ SEND_STRING("\\\\{larr[1]} ");}}
+                else                                       {{ SEND_STRING("\\\\{larr[0]} ");}}
             '''
         else:
             str += f'''        SEND_STRING("\\\\{larr[0]} ");
             '''
         str += '''}
-      return false; 
+      return true;
 '''
         print(str)
         return
