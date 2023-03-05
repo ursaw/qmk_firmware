@@ -37,7 +37,7 @@
 // Apply the modifier on keys that are tapped during a short hold of a modtap
 // #define PERMISSIVE_HOLD
 
-#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+// #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 

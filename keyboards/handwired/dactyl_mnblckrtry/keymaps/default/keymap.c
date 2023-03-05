@@ -13,7 +13,7 @@
 #define _________________QWERTY_L0_________________        KC_GESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5
 #define _________________QWERTY_L1_________________        KC_TAB  , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T
 #define _________________QWERTY_L2_________________        KC_LSFT , KC_A   , KC_S   , KC_D   , KC_F   , KC_G
-#define _________________QWERTY_L3_________________        KC_LCTRL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B
+#define _________________QWERTY_L3_________________        KC_LCTL , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B
 
 #define _________________QWERTY_R0_________________        KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_DEL
 #define _________________QWERTY_R1_________________        KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC
@@ -49,10 +49,10 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
-        KC_GESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5,                                          KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_DEL,
+        QK_GESC , KC_1   , KC_2   , KC_3   , KC_4   , KC_5,                                          KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_DEL,
         KC_TAB  , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T,                                          KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_BSPC,
         KC_LSFT , KC_A   , KC_S   , KC_D   , KC_F   , KC_G,                                          KC_H   , KC_J   , KC_K   , KC_L   , KC_SCLN, KC_QUOT,
-        KC_LCTRL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B,                                KC__MUTE, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT,
+        KC_LCTL , KC_Z   , KC_X   , KC_C   , KC_V   , KC_B,                              KC_KB_MUTE, KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_RSFT,
                           KC_RGUI,  KC_LALT, MO(_RAISE), KC_ENT, XXXXXXX,                   XXXXXXX, KC_SPC,  MO(_RAISE), KC_RALT, MO(_LOWER)
     ),
      [_LOWER] = LAYOUT(
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_F1  , KC_F2  , KC_F3  , KC_F4   , KC_F5   ,                                      KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10  , KC_F11  ,
         _______, SELWORD, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                      KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_INS  , KC_F12  ,
         _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                      KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_MINUS, KC_EQUAL,
-        _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                             _______, KC_DEL , KC_BSPC, KC_LBRC, KC_RBRC, KC_BSLASH, _______,
+        _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                             _______, KC_DEL , KC_BSPC, KC_LBRC, KC_RBRC, KC_BSLS , _______,
                          _______, _______, _______, _______, _______,                       _______, _______, _______, _______, _______
     ),
 };
@@ -102,7 +102,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
             break;
         default:
-            if (get_mods() & MOD_BIT(KC_LCTRL)) {
+            if (get_mods() & MOD_BIT(KC_LCTL)) {
                 if (clockwise) {      /*  Left CTRL:  undo/redo */
                     tap_code16(LCTL(KC_Y));
                 } else {
@@ -110,9 +110,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 }
             }else{           /*  default   page up and down */
                 if (clockwise) {
-                    tap_code(KC_PGDOWN);
+                    tap_code(KC_PAGE_DOWN);
                  } else {
-                    tap_code(KC_PGUP);
+                    tap_code(KC_PAGE_UP);
                  }
             }
 
