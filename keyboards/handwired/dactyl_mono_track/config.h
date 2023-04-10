@@ -33,16 +33,55 @@
 #define ROTATIONAL_TRANSFORM_ANGLE -25
  */
 
+/*
+
+
+| Track| Description                | Promicro | QMK*   |   PiPICO
+| -----|----------------------------|----------|
+|  RES |  Chip reset(active low)    |    -     |
+|  GND |  Ground                    | GND      |
+|  MOT |  Motion detect (active low | 7        |
+|  SS  |  Slave Select / Chip select| 10 A10   |        26/GP20
+|  SCL |  SPI/Serial data clock     | 15 SCLK  |        24/GP18
+|  MOS |  MOSI                      | 16 MOSI  |        21/GP16
+|  MIS |  MISO                      | 14 MISO  |        25/GP19
+|  VCC |  Input power supply (2-5.5V| VCC      |
+
+
+QMK*  keyboards/bastardkb/charybdis/3x5/v2/splinky_3/config.h
+
+                           SPLINKY
+#define SPI_SCK_PIN  GP22   SCK
+#define SPI_MISO_PIN GP20   CIPO
+#define SPI_MOSI_PIN GP23   COPI
+#define POINTING_DEVICE_CS_PIN GP16
+
+*/
+
 /* SPI & PMW3360 settings. */
 #define SPI_DRIVER SPID0
-#define SPI_SCK_PIN GP22
-#define SPI_MISO_PIN GP20
-#define SPI_MOSI_PIN GP23
-#define POINTING_DEVICE_CS_PIN GP16
+#define SPI_SCK_PIN            GP18
+#define SPI_MISO_PIN           GP19
+#define SPI_MOSI_PIN           GP16
+#define POINTING_DEVICE_CS_PIN GP20
 
 /* Reset. */
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP17
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
 
+// Invert X axis on mouse reports.
+#define POINTING_DEVICE_INVERT_X
 
+
+#undef SPLIT_POINTING_ENABLE
+
+
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
+/*
+#define BOOTMAGIC_LITE_ROW    0
+#define BOOTMAGIC_LITE_COLUMN 0
+#define BOOTMAGIC_LITE_ROW_RIGHT    5
+#define BOOTMAGIC_LITE_COLUMN_RIGHT 0
+*/
