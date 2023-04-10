@@ -3,6 +3,9 @@
 
 #include QMK_KEYBOARD_H
 
+//  qmk compile  -kb handwired/dactyl_mono_track -km default
+
+
 /* https://getreuer.info/posts/keyboards/select-word/index.html */
 // #include "select_word.h"
 
@@ -24,7 +27,7 @@ enum layer_names {
 enum custom_keycodes {
     SELWORD  = SAFE_RANGE
 };
- 
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
