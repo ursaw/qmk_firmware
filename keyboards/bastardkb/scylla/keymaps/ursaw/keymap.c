@@ -14,10 +14,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-/*
+/*  Compile
+ *  =======
  * qmk compile -kb bastardkb/scylla/v1/elitec -km ursaw
+ *    or with docker
+ *  util/docker_build.sh    bastardkb/scylla/v1/elitec:ursaw
+ * 
  * qmk flash -bl dfu
  *
+ *  
  *
  * TODO  https://github.com/filterpaper/qmk_userspace
  */
