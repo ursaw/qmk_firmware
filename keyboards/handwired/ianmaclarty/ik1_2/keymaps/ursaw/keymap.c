@@ -80,13 +80,27 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
 ),
 
 
-
+//   https://forum.colemak.com/topic/1858-learn-colemak-in-steps-with-the-tarmak-layouts/
 [_TARMAK1] = LAYOUT_split_4x6_3(
 _______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
 KC_TAB,     KC_Q,       KC_W,       KC_J,       KC_R,       KC_T,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
 KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,                              KC_H,       KC_N,       KC_E,       KC_L,       KC_SCLN,    KC_QUOT,
+KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                              KC_K,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_RSFT,
+                                                KC_LALT,    ENT_RSE, ENT_LWR,        SPC_BS2, SPC_RSE,    KC_RALT
+),
+[_TARMAK2] = LAYOUT_split_4x6_3(
+_______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_R,       KC_G,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
+KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_T,       KC_J,                              KC_H,       KC_N,       KC_E,       KC_L,       KC_SCLN,    KC_QUOT,
+KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                              KC_K,       KC_MINUS,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_RSFT,
+                                                KC_LALT,    ENT_RSE, ENT_LWR,        SPC_BS2, SPC_RSE,    KC_RALT
+),
+[_TARMAK3] = LAYOUT_split_4x6_3(
+_______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_R,       KC_G,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
+KC_LSFT,    KC_A,       KC_R,       KC_S,       KC_T,       KC_D,                              KC_H,       KC_N,       KC_E,       KC_L,       KC_SCLN,    KC_QUOT,
 KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                              KC_N,       KC_K,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_RSFT,
-                                                KC_LALT,    ENT_RSE, ENT_LWR,        SPC_BS2*****, SPC_RSE,    KC_RALT
+                                                KC_LALT,    ENT_RSE, ENT_LWR,        SPC_BS2, SPC_RSE,    KC_RALT
 ),
 
 
@@ -108,15 +122,15 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
    _______, QK_GESC, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                 KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_INS  , KC_F11  ,
    _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                 KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_MINUS, KC_F12,
    _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                                 KC_BSPC,KC_MS_BTN1,KC_MS_BTN3,KC_MS_BTN2, KC_BSLS, _______,
-                                               KC_LALT,    ENT_RSE, KC_LGUI,        SPC_LWR, SPC_RSE,    KC_RALT
+                                                  _______,    _______,    _______,    _______,    _______,    _______
 ),
 
 [_LOWER] = LAYOUT_split_4x6_3(
-   XXXXXXX, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_BSPC,                                DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, XXXXXXX, XXXXXXX,
+   XXXXXXX, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_BSPC,                                DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, BSEL   , XXXXXXX,
    _______, KC_PAST, KC_4  , KC_5  , KC_6  , KC_PLUS,                                DM_PLY1, DM_PLY2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
    XXXXXXX ,KC_PSLS, KC_1  , KC_2  , KC_3  , KC_MINUS,                              XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_CAPS,
    XXXXXXX, XXXXXXX, KC_0  , KC_0  ,KC_DOT , KC_ENT,                                XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
-                                                  KC_LGUI,    ENT_RSE, KC_LGUI,        SPC_LWR, SPC_RSE,    KC_RALT
+                                                _______,    _______,    _______,    _______,    _______,    _______
 ),
 
 // WIP
@@ -154,7 +168,7 @@ _______,    KC_F9,      KC_F10,     KC_F11,     KC_F12,     BSEL,               
 ),
 
 [LBSEL] = LAYOUT_split_4x6_3(
-_______,    DF(_TARMAK1),      BASE2,      _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+_______,    DF(_TARMAK1),  DF(_TARMAK2), DF(_TARMAK3),    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
 _______,    BASE1,      _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
