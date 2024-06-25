@@ -1,5 +1,5 @@
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
-MOUSEKEY_ENABLE = no        # Mouse keys
+MOUSEKEY_ENABLE = yes       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no         # Commands for debug and configuration
@@ -14,6 +14,7 @@ RGBLIGHT_SUPPORTED = no    # RGB underglow is supported, but not enabled by defa
 RGB_MATRIX_ENABLE = no     # Enable keyboard RGB matrix functionality
 DYNAMIC_MACRO_ENABLE = yes # use dynamic macros
 
+CAPS_WORD_ENABLE = yes
 
 SPLIT_KEYBOARD = yes
 
