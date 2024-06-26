@@ -14,6 +14,8 @@ RGBLIGHT_SUPPORTED = no    # RGB underglow is supported, but not enabled by defa
 RGB_MATRIX_ENABLE = no     # Enable keyboard RGB matrix functionality
 DYNAMIC_MACRO_ENABLE = yes # use dynamic macros
 
+COMBO_ENABLE  = yes        # have ESC at QW
+
 CAPS_WORD_ENABLE = yes
 
 SPLIT_KEYBOARD = yes
