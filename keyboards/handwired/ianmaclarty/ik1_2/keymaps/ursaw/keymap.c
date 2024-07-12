@@ -13,6 +13,7 @@ enum ik_layers {
    _RAISE,
    _LOWER,
    _MOUSE,
+   _NUMROW,
    _TARMAK1,
    _TARMAK2,
    _TARMAK3,
@@ -49,11 +50,15 @@ const uint16_t PROGMEM combo_qw[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM combo_vb[] = {KC_V, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_kl[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM comb_iop[] = {KC_I, KC_O, KC_P, COMBO_END};
+const uint16_t PROGMEM comb_xcv[] = {KC_X, KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM comb_mdc[] = {KC_M, KC_DOT,KC_COMMA, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(combo_qw, KC_ESC),
+    COMBO(combo_qw, QK_GESC),  // QK_GESC
     COMBO(combo_vb, KC_SPC),
     // DDACOMBO(combo_kl, KC_ENT),
     COMBO(comb_iop, KC_DEL),
+    COMBO(comb_xcv, MO(_NUMROW)),
+    COMBO(comb_mdc, MO(_NUMROW)),
 };
 // optional ideas to switch layers
 // #define TABNUM LT(LNUM, KC_TAB)
@@ -77,6 +82,9 @@ combo_t key_combos[] = {
 #define SPC_LWR  LT(_LOWER, KC_SPC)
 
 #define QOT_TEX  LT(_LATEX, KC_QUOT)
+
+
+#define  SCRN_SHT LGUI(LSFT(KC_S))
 
 
 
@@ -132,12 +140,31 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
 
 [_LOWER] = LAYOUT_split_4x6_3(
    _______, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_BSPC,                                DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, BSEL   , XXXXXXX,
-   QK_GESC, KC_PAST, KC_4  , KC_5  , KC_6  , KC_PLUS,                                DM_PLY1, DM_PLY2, XXXXXXX, LGUI(S(KC_S)), XXXXXXX, XXXXXXX,
+   QK_GESC, KC_PAST, KC_4  , KC_5  , KC_6  , KC_PLUS,                                DM_PLY1, DM_PLY2,  XXXXXXX,XXXXXXX,SCRN_SHT, XXXXXXX,
    KC_TAB  ,KC_PSLS, KC_1  , KC_2  , KC_3  , KC_MINUS,                              XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_CAPS,
    XXXXXXX, XXXXXXX, KC_0  , KC_0  ,KC_DOT , KC_ENT,                                XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
                                                 _______,    _______,    _______,    _______,    _______,    _______
 ),
 
+  /*  NUMber ROW
+   *        .----------------------------------.                                  .----------------------------------.
+   *        |      |      |      |      |      |                                  |      |      |      |      |      |
+   * .------+------+------+------+------+------|                                  |------+------+------+------+------+------.
+   * |      |  F1  |  F2  |  F3  |  F4  |  F5  |                                  |  F6  |  F7  |  F8  |  F9  |  F10 |      |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * |      |   1  |   2  |   3  |   4  |   5  |                                  |   6  |   7  |   8  |   9  |   10 |      |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * |      |   !  |   @  |   #  |   $  |   %  |                                  |   ^  |   &  |   *  |   (  |    ) |      |
+   * '-----------------------------------------/                                  \-----------------------------------------'
+   */
+
+[_NUMROW] = LAYOUT_split_4x6_3(
+_______, XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX,                          XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       _______,
+_______,   KC_F1,      KC_F2,      KC_F3,      KC_F4,       KC_F5,                            KC_F6,      KC_F7,      KC_F8,      KC_F9,     KC_F10,       _______ ,
+_______,    KC_1,       KC_2,       KC_3,       KC_4,       LMSE5,                             KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+_______, KC_EXLM,      KC_AT,    KC_HASH,  KC_DOLLAR,  KC_PERCENT,                    KC_CIRCUMFLEX,KC_AMPERSAND,KC_ASTERISK,    KC_LPRN,   KC_LPRN,       _______ ,
+                                             _______,    _______,    _______,    _______,    _______,    _______
+),
 
 
 //  https://dreymar.colemak.org/tarmak-steps.html#tmk-dh
