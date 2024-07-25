@@ -14,8 +14,10 @@ enum ik_layers {
    _LOWER,
    _MOUSE,
    _NUMROW,
-   _TARMAK1,
-   _TARMAK2,
+   _TARMAK1a,
+   _TARMAK1b,
+   _TARMAK2a,
+   _TARMAK2b,
    _TARMAK3,
    _LBSEL,
    _LATEX
@@ -47,6 +49,7 @@ enum custom_keycodes {
 // ---------------- C O M B O S  -------------
 
 const uint16_t PROGMEM combo_qw[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM combo_q5[] = {KC_Q, KC_5, COMBO_END};
 const uint16_t PROGMEM combo_vb[] = {KC_V, KC_B, COMBO_END};
 const uint16_t PROGMEM combo_kl[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM comb_iop[] = {KC_I, KC_O, KC_P, COMBO_END};
@@ -54,6 +57,7 @@ const uint16_t PROGMEM comb_xcv[] = {KC_X, KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM comb_mdc[] = {KC_M, KC_DOT,KC_COMMA, COMBO_END};
 combo_t key_combos[] = {
     COMBO(combo_qw, QK_GESC),  // QK_GESC
+    COMBO(combo_q5, MO(_MOUSE)), // Mouse Layer
     COMBO(combo_vb, KC_SPC),
     // DDACOMBO(combo_kl, KC_ENT),
     COMBO(comb_iop, KC_DEL),
@@ -90,8 +94,21 @@ combo_t key_combos[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+
+  /* BASE 1
+   *
+   *        .----------------------------------.                                  .----------------------------------.
+   *        |   1  |   2  |   3  |   4  |   5  |                                  |   6  |   7  |   8  |   9  |  10  |
+   * .------+------+------+------+------+------|                                  |------+------+------+------+------+------.
+   * |  TAB |   Q  |   W  |   E  |   R  |  T   |                                  |   Y  |   U  |   I  |   O  |   P  |  DEL |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | SHFT |   A  |   S  |   D  |   F  |  G   |                                  |   H  |   J  |   K  |   L  |   :  |  '"  |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | CNTR |   Z  |   X  |   C  |   V  |  B   |                                  |   N  |   M  |   ,  |  .   |   /  | SHFT |
+   * '-----------------------------------------/                                  \-----------------------------------------'
+   */
 [_BASE1] = LAYOUT_split_4x6_3(
-_______,    KC_1,       KC_2,       KC_3,       KC_4,       LMSE5,                             KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+_______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
 KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
 KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,                              KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
 KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                              KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_RSFT,
@@ -122,7 +139,7 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
    _______, KC_F1  , KC_F2  , KC_F3  , KC_F4   , KC_F5   ,                                 KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10  ,_______ ,
    _______, QK_GESC, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                 KC_PGUP, KC_HOME, KC_UP  , KC_END , KC_INS  , KC_F11 ,
    _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                 KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_MINUS, KC_F12 ,
-   _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                                 KC_DEL , KC_BSPC, KC_LBRC, KC_RBRC, KC_BSLS, _______ ,
+   _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                                 KC_DEL , KC_BSPC, KC_LBRC, KC_RBRC, KC_BSLS, QK_LEAD ,
                                                   _______,    _______,    _______,    _______,    _______,    _______
 ),
 
@@ -161,7 +178,7 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
 [_NUMROW] = LAYOUT_split_4x6_3(
 _______, XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX,                          XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       _______,
 _______,   KC_F1,      KC_F2,      KC_F3,      KC_F4,       KC_F5,                            KC_F6,      KC_F7,      KC_F8,      KC_F9,     KC_F10,       _______ ,
-_______,    KC_1,       KC_2,       KC_3,       KC_4,       LMSE5,                             KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+_______,    KC_1,       KC_2,       KC_3,       KC_4,        KC_5,                             KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
 _______, KC_EXLM,      KC_AT,    KC_HASH,  KC_DOLLAR,  KC_PERCENT,                    KC_CIRCUMFLEX,KC_AMPERSAND,KC_ASTERISK,    KC_LPRN,   KC_LPRN,       _______ ,
                                              _______,    _______,    _______,    _______,    _______,    _______
 ),
@@ -169,8 +186,21 @@ _______, KC_EXLM,      KC_AT,    KC_HASH,  KC_DOLLAR,  KC_PERCENT,              
 
 //  https://dreymar.colemak.org/tarmak-steps.html#tmk-dh
 
-//   The (J)>E>K>N "most essential" loop, fixing the important E (and N)
-[_TARMAK1] = LAYOUT_split_4x6_3(
+//   The E>K>N>(J) "most essential" loop, fixing the important E (and N)
+
+  /*
+   *        .----------------------------------.                                  .----------------------------------.
+   *        |      |      |      |      |      |                                  |      |      |      |      |      |
+   * .------+------+------+------+------+------|                                  |------+------+------+------+------+------.
+   * |  TAB |   Q  |   W  |  _J_ |   R  |  T   |                                  |   Y  |   U  |   I  |   O  |   P  |  DEL |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | SHFT |   A  |   S  |   D  |   F  |  G   |                                  |  _H  |  _N_ |  _E_ |   L  |   :  |  '"  |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | CNTR |   Z  |   X  |   C  |   V  |  B   |                                  |  _K_ |   M  |   ,  |  .   |   /  | SHFT |
+   * '-----------------------------------------/                                  \-----------------------------------------'
+   */
+
+[_TARMAK1a] = LAYOUT_split_4x6_3(
 _______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
 KC_TAB,     KC_Q,       KC_W,       KC_J,       KC_R,       KC_T,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
 KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,                              KC_H,       KC_N,       KC_E,       KC_L,       KC_SCLN,    KC_QUOT,
@@ -178,14 +208,47 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
                                                 KC_LALT,    ENT_RSE, ENT_LWR,        SPC_BS2, SPC_RSE,    KC_RALT
 ),
 
-//  The (J)>G>T>F loop, bringing the important T into place
-[_TARMAK2] = LAYOUT_split_4x6_3(
+  /*
+   *        .----------------------------------.                                  .----------------------------------.
+   *        |      |      |      |      |      |                                  |      |      |      |      |      |
+   * .------+------+------+------+------+------|                                  |------+------+------+------+------+------.
+   * |  TAB |   Q  |   W  |  _J_ |   R  |  T   |                                  |   Y  |   U  |   I  |   O  |   P  |  DEL |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | SHFT |   A  |   S  |   D  |   F  |  G   |                                  |  *M* |  _N_ |  _E_ |   L  |   :  |  '"  |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | CNTR |   Z  |   X  |   C  |   V  |  B   |                                  |  _K_ |  *H* |   ,  |  .   |   /  | SHFT |
+   * '-----------------------------------------/                                  \-----------------------------------------'
+   */
+
+[_TARMAK1b] = LAYOUT_split_4x6_3(
 _______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
-KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_R,       KC_G,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
-KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_T,       KC_J,                              KC_H,       KC_N,       KC_E,       KC_L,       KC_SCLN,    KC_QUOT,
-KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                              KC_K,       KC_MINUS,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_RSFT,
+KC_TAB,     KC_Q,       KC_W,       KC_J,       KC_R,       KC_T,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
+KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,                              KC_M,       KC_N,       KC_E,       KC_L,       KC_SCLN,    KC_QUOT,
+KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                              KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_RSFT,
                                                 KC_LALT,    ENT_RSE, ENT_LWR,        SPC_BS2, SPC_RSE,    KC_RALT
 ),
+
+  /*
+   *        .----------------------------------.                                  .----------------------------------.
+   *        |      |      |      |      |      |                                  |      |      |      |      |      |
+   * .------+------+------+------+------+------|                                  |------+------+------+------+------+------.
+   * |  TAB |   Q  |   W  |  _J_ |   R  |  T   |                                  |   Y  |   U  |   I  |   O  |   P  |  DEL |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | SHFT |   A  |   S  |   D  |   F  |  G   |                                  |  *M* |  _N_ |  _E_ |   L  |   :  |  '"  |
+   * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
+   * | CNTR |   Z  |   X  |   C  |   V  |  B   |                                  |  _K_ |  *H* |   ,  |  .   |   /  | SHFT |
+   * '-----------------------------------------/                                  \-----------------------------------------'
+   */
+
+[_TARMAK2a] = LAYOUT_split_4x6_3(
+_______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
+KC_TAB,     KC_Q,       KC_W,       KC_J,       KC_R,       KC_T,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
+KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,                              KC_M,       KC_N,       KC_E,       KC_L,       KC_SCLN,    KC_QUOT,
+KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,                              KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_RSFT,
+                                                KC_LALT,    ENT_RSE, ENT_LWR,        SPC_BS2, SPC_RSE,    KC_RALT
+),
+
+
 [_TARMAK3] = LAYOUT_split_4x6_3(
 _______,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                              KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______,
 KC_TAB,     KC_Q,       KC_W,       KC_F,       KC_R,       KC_G,                              KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
@@ -205,15 +268,15 @@ XXXXXXX,    TEX_Z,    TEX_X,    TEX_C,     TEX_V,       TEX_B,                  
 
 // WIP
 [_MOUSE] = LAYOUT_split_4x6_3(
- _______, KC_F1  , KC_F2  , KC_F3  , KC_F4   , KC_F5   ,                                 KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10  ,_______   ,
-   _______, QK_GESC, KC_LCBR, KC_RCBR, KC_PLUS , KC_GRV  ,                                 KC_PGUP, KC_HOME, KC_MS_U	  , KC_END , KC_INS  , KC_F11  ,
-   _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_EQUAL,                                 KC_PGDN, KC_MS_L	, KC_MS_D	, KC_MS_R	, KC_MINUS, KC_F12,
-   _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_UNDS ,                                 KC_BSPC,KC_MS_BTN1,KC_MS_BTN3,KC_MS_BTN2, KC_BSLS, _______,
+ _______, KC_F1  , KC_F2  , KC_F3  , KC_F4   , KC_F5   ,                                   KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10  ,_______   ,
+   _______, QK_GESC, KC_LCBR, KC_RCBR, KC_PLUS , KC_ACL2,                                  XXXXXXX, XXXXXXX, KC_MS_U	  , XXXXXXX , XXXXXXX  , XXXXXXX  ,
+   _______, KC_PIPE, KC_LBRC, KC_RBRC, KC_MINUS, KC_ACL1,                                  XXXXXXX, KC_MS_L	, KC_MS_D	, KC_MS_R	, XXXXXXX, XXXXXXX,
+   _______, KC_UNDO, KC_LGUI, KC_APP , KC_SPC  , KC_ACL0 ,                                 KC_BSPC,KC_MS_BTN1,KC_MS_BTN3,KC_MS_BTN2, KC_BSLS, _______,
                                                 _______,    _______,    _______,    KC_BTN1 ,    KC_BTN2,    KC_MS_BTN3
 ),
 
 [_LBSEL] = LAYOUT_split_4x6_3(
-_______,    DF(_TARMAK1),  DF(_TARMAK2), DF(_TARMAK3),    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+_______,    DF(_TARMAK1a),    DF(_TARMAK1b),  DF(_TARMAK2a),  DF(_TARMAK2b), DF(_TARMAK3),      _______,    _______,    _______,    _______,    _______,    _______,
 _______,    BASE1,      BASE2,      _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
 _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
@@ -382,4 +445,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     }
     return true;
+};
+
+
+void leader_end_user(void) {
+
+    if (leader_sequence_one_key(KC_L)) {
+        SEND_STRING(SS_LGUI("l"));
+    } else  if (leader_sequence_one_key(KC_R)) {
+        SEND_STRING(SS_LGUI("r"));
+    }
+
+     else if (leader_sequence_two_keys(KC_E, KC_D)) {
+        SEND_STRING(SS_LGUI("r") "cmd\n" SS_LCTL("c"));
+    }
+
 };
