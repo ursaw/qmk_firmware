@@ -14,7 +14,9 @@
         "bootmagic": true,
         "encoder": true,
         "extrakey": true,
-        "mousekey": true
+        "mousekey": true,
+        "capsword": true
+        
     },
     "tapping": {
         "toggle": 2
