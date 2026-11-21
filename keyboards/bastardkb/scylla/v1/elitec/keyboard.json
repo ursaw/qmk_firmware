@@ -1,0 +1,15 @@
+{
+    "development_board": "elite_c",
+    "matrix_pins": {
+        "cols": ["B4", "E6", "C6", "B1", "B3", "B2"],
+        "rows": ["D7", "B5", "F7", "F6", "B6"]
+    },
+    "split": {
+        "serial": {
+            "pin": "D0"
+        }
+    },
+    "ws2812": {
+        "pin": "D2"
+    }
+}
