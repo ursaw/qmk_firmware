@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include "heading_word.h"
 
 //
 //   util/docker_build.sh  ursaw/ik:ursaw
@@ -43,7 +44,8 @@ enum custom_keycodes {
   TEX_T,
   TEX_V,
   TEX_X,
-  TEX_Z
+  TEX_Z,
+  HD_WORD   // HEADING_WORDS on/off, see users/ursaw/heading_word.h
 };
 
 // ---------------- C O M B O S  -------------
@@ -55,6 +57,7 @@ const uint16_t PROGMEM combo_kl[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM comb_iop[] = {KC_I, KC_O, KC_P, COMBO_END};
 const uint16_t PROGMEM comb_xcv[] = {KC_X, KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM comb_mdc[] = {KC_M, KC_DOT,KC_COMMA, COMBO_END};
+const uint16_t PROGMEM comb_wer[] = {KC_W, KC_E, KC_R, COMBO_END};
 combo_t key_combos[] = {
     COMBO(combo_qw, QK_GESC),  // QK_GESC
     COMBO(combo_q5, MO(_MOUSE)), // Mouse Layer
@@ -63,6 +66,7 @@ combo_t key_combos[] = {
     COMBO(comb_iop, KC_DEL),
     COMBO(comb_xcv, MO(_NUMROW)),
     COMBO(comb_mdc, MO(_NUMROW)),
+    COMBO(comb_wer, HD_WORD),     // HEADING_WORDS
 };
 // optional ideas to switch layers
 // #define TABNUM LT(LNUM, KC_TAB)
@@ -149,7 +153,7 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
    * .------+------+------+------+------+------|                                  |------+------+------+------+------+------.
    * |  ESC |   *  |   4  |   5  |   6  |  +   |                                  |  M1  |  M2  |      | SHOT |      |      |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
-   * |  TAB |   /  |   1  |   2  |   3  |  -   |                                  |      | STOP | PREV | NEXT |      | CAPS |
+   * |  TAB |   /  |   1  |   2  |   3  |  -   |                                  | HDWD | STOP | PREV | NEXT |      | CAPS |
    * |------+------+------+------+------+------|                                  |------+------+------+------+------+------|
    * |      |      |   0  |   0  |   .  |  ENT |                                  |      | Mute |  V+  | V-   |      |      |
    * '-----------------------------------------/                                  \-----------------------------------------'
@@ -158,7 +162,7 @@ KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               
 [_LOWER] = LAYOUT_split_4x6_3(
    _______, XXXXXXX, KC_7  , KC_8  , KC_9  , KC_BSPC,                                DM_REC1, DM_REC1, DM_RSTP, XXXXXXX, BSEL   , XXXXXXX,
    QK_GESC, KC_PAST, KC_4  , KC_5  , KC_6  , KC_PLUS,                                DM_PLY1, DM_PLY2,  XXXXXXX,XXXXXXX,SCRN_SHT, XXXXXXX,
-   KC_TAB  ,KC_PSLS, KC_1  , KC_2  , KC_3  , KC_MINUS,                              XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_CAPS,
+   KC_TAB  ,KC_PSLS, KC_1  , KC_2  , KC_3  , KC_MINUS,                              HD_WORD, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_CAPS,
    XXXXXXX, XXXXXXX, KC_0  , KC_0  ,KC_DOT , KC_ENT,                                XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
                                                 _______,    _______,    _______,    _______,    _______,    _______
 ),
@@ -287,6 +291,8 @@ _______,    _______,    _______,    _______,    _______,    _______,            
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_heading_word(keycode, record, HD_WORD)) { return false; }
+
     switch (keycode) {
 
     //  https://getreuer.info/posts/keyboards/macros3/index.html#shift-backspace-delete
