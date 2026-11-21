@@ -1,0 +1,7 @@
+#pragma once
+
+#define COMBO_VARIABLE_LEN
+
+#define TAPPING_TERM 200
+
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
