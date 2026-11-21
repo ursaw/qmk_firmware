@@ -1,0 +1,8 @@
+
+
+LEADER_ENABLE = no
+DYNAMIC_MACRO_ENABLE = yes
+MOUSEKEY_ENABLE = yes
+
+VPATH += keyboards/gboards
+COMBO_ENABLE=yes
